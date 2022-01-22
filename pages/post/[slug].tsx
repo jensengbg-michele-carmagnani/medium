@@ -18,7 +18,7 @@ interface IFormInput {
 }
 const Post = ({ post }: Props) => {
   const [submitted, setSubmitted] = useState(false);
-  console.log('comment', post)
+
   const {
     register,
     handleSubmit,
@@ -159,6 +159,19 @@ const Post = ({ post }: Props) => {
           />
         </form>
       )}
+      {/* comments */}
+      <div className='flext flex-col p-10 max-w-3xl mx-auto shadow-yellow-400 shadow space-y-2 mb-9'>
+        <h3 className='text-4xl'>Comments</h3>
+        <hr className='pb-2'/>
+        {post.comments.map((comment) => (
+          <div key={comment._id} className="py-2 px-3   ">
+            <p className=''>
+              <span className="text-yellow-500 relative right-3">{comment.name}</span>:
+              <span>{comment.comment}</span>
+            </p>
+          </div>
+        ))}
+      </div>
     </main>
   );
 };
