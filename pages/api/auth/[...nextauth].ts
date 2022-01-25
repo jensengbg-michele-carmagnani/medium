@@ -30,19 +30,13 @@ export default NextAuth({
 
   callbacks: {
     async jwt({ user, token, account }) {
-      if (account && user) {
-        return {
-          ...token,
-          accessToken: account.access_token,
-          refreshToken: account.refresh_token,
-          username: account.username,
-          accessTokenExpires: account.expires_at! * 1000,
-        };
+      if (account?.accessToken) {
+        token.accessToken = account.accessToken;
       }
+      return token;
     },
     async redirect({ url, baseUrl }) {
       return baseUrl;
     },
-    
   },
 });
