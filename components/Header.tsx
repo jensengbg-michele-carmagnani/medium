@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useSession, signIn, signOut, getProviders } from 'next-auth/react';
 const Header = () => {
   const { data: session } = useSession();
-  
 
   return (
     <header className="flex justify-between p-5 max-w-7xl ">
@@ -38,10 +37,13 @@ const Header = () => {
             Get Started
           </h3>
         ) : (
-          <div className='flex items-center justify-between w-60'>
-            <h2>{session.user.name?.toUpperCase()}</h2>
-            <img className='h-10 w-10 rounded-full' src={session.user?.image} alt="" />
-
+          <div className="flex items-center justify-between w-60">
+            <h2>{session.user?.name?.toUpperCase()}</h2>
+            <img
+              className="h-10 w-10 rounded-full"
+              src={session.user?.image}
+              alt=""
+            />
           </div>
         )}
       </div>
