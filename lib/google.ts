@@ -1,8 +1,9 @@
 import { google } from 'googleapis';
 
-const oauth2Client = new google.auth.OAuth2({
+const googleApi = new google.auth.OAuth2({
   clientId: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  redirectUri:'http://localhost:3000/api/auth/callback/google'
 });
 
 // generate a url that asks permissions for Blogger and Google Calendar scopes
@@ -14,7 +15,7 @@ const scopes = [
   'profile',
 ].join(',');
 
- export const LOGIN_URL = oauth2Client.generateAuthUrl({
+ export const LOGIN_URL = googleApi.generateAuthUrl({
   // 'online' (default) or 'offline' (gets refresh_token)
   access_type: 'offline',
 
@@ -22,4 +23,4 @@ const scopes = [
   scope: scopes,
 });
 
-export default oauth2Client
+export default googleApi

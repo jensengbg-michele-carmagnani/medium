@@ -1,14 +1,16 @@
 import Head from 'next/head';
 import Header from '../components/Header';
+import { useSession } from 'next-auth/react';
 import { sanityClient, urlFor } from '../sanity';
-import Link from 'next/link';
 import { Post } from '../Typings';
+import Link from 'next/link';
+import { PlusCircleIcon } from '@heroicons/react/outline';
 interface Props {
   posts: [Post];
 }
 
 export default function Home({ posts }: Props) {
-  
+  const { data: session } = useSession();
   return (
     <div className="max-w-7xl mx-auto">
       <Head>
@@ -65,6 +67,13 @@ export default function Home({ posts }: Props) {
               </div>
             </Link>
           ))}
+          {session && (
+            <Link href="/create-post">
+              <div className="flex items-center justify-center border rounded  bg-slate-200 hover:opacity-60 hover:text-blue-700 transition transform duration-200 ease-out">
+                <PlusCircleIcon className="h-28 pointer:cursor" />
+              </div>
+            </Link>
+          )}
         </>
       </div>
     </div>

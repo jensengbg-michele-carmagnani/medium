@@ -6,7 +6,7 @@ const login = (props: { providers: any }) => {
 
   const { data: session } = useSession();
 
-  console.log(`${session?.user?.name} ---- `);
+  
   const router = useRouter()
 
   if (!session) {
