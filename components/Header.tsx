@@ -1,7 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-
+import { useSession, signIn, signOut, getProviders } from 'next-auth/react';
 const Header = () => {
+  const { data: session } = useSession();
+  console.log(`header ----${session?.user?.name}  `);
   return (
     <header className="flex justify-between p-5 max-w-7xl ">
       <div className="flex items-center  space-x-5">
@@ -21,10 +23,18 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center space-x-5 text-green-600 ">
-        <h3 className="cursor-pointer hover:text-black">Sign In</h3>
-        <h3 className="border px-4 py-1 rounded-full border-green-600 cursor-pointer hover:bg-green-600 hover:text-white ">
+        {!session ? (
+          <Link href="/login">
+            <h3 className="cursor-pointer hover:text-black">Sign In</h3>
+          </Link>
+        ) : (
+          <button onClick={() => signOut()}>
+            <h3 className="cursor-pointer hover:text-red-800">Sign Out</h3>
+          </button>
+        )}
+        {!session ? <h3 className="border px-4 py-1 rounded-full border-green-600 cursor-pointer hover:bg-green-600 hover:text-white ">
           Get Started
-        </h3>
+        </h3>: session?.user?.name}
       </div>
     </header>
   );
