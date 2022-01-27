@@ -6,13 +6,16 @@ import { Post } from '../Typings';
 import Link from 'next/link';
 import { PlusCircleIcon } from '@heroicons/react/outline';
 interface Props {
-  posts: [Post];
+  posts: [Post]
 }
 
+
+
 export default function Home({ posts }: Props) {
+  console.log('data', posts)
   const { data: session } = useSession();
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto h-screen">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -61,14 +64,14 @@ export default function Home({ posts }: Props) {
                   </div>
                   <img
                     className="h-12 y-12 rounded-full"
-                    src={urlFor(post.mainImage).url()!}
+                    src={urlFor(post.author.image).url()!}
                   />
                 </div>
               </div>
             </Link>
           ))}
           {session && (
-            <Link href="/create-post">
+            <Link href="/createPost">
               <div className="flex items-center justify-center border rounded  bg-slate-200 hover:opacity-60 hover:text-blue-700 transition transform duration-200 ease-out">
                 <PlusCircleIcon className="h-28 pointer:cursor" />
               </div>

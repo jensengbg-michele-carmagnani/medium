@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
 import { Post } from '../../Typings';
-import { sanityClient, urlFor } from '../../sanity';
 import PortableText from 'react-portable-text';
+import { sanityClient, urlFor } from '../../sanity';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Header from '../../components/Header';
 
@@ -41,7 +41,7 @@ const Post = ({ post }: Props) => {
     <main>
       <Header />
       <img
-        className="w-full h-40 object-cover"
+        className="w-2/3 h-64 object-cover m-auto"
         src={urlFor(post.mainImage).url()!}
         alt=""
       />
@@ -56,8 +56,8 @@ const Post = ({ post }: Props) => {
               alt=""
             />
           </figure>
-          <p className="font-extralight text-sm">
-            Blog post by{' '}
+          <p className="font-extralight text-sm ">
+            <span className="block">Blog post by </span>
             <span className="font-thin text-green-600">
               {post.author.name}{' '}
             </span>{' '}
@@ -160,14 +160,16 @@ const Post = ({ post }: Props) => {
         </form>
       )}
       {/* comments */}
-      <div className='flext flex-col p-10 max-w-3xl mx-auto shadow-yellow-400 shadow space-y-2 mb-9'>
-        <h3 className='text-4xl'>Comments</h3>
-        <hr className='pb-2'/>
+      <div className="flext flex-col p-10 max-w-3xl mx-auto shadow-yellow-400 shadow space-y-2 mb-9">
+        <h3 className="text-4xl">Comments</h3>
+        <hr className="pb-2" />
         {post.comments.map((comment) => (
           <div key={comment._id} className="py-2 px-3   ">
-            <p className=''>
-              <span className="text-yellow-500 relative right-3">{comment.name}</span>:
-              <span>{comment.comment}</span>
+            <p className="">
+              <span className="text-yellow-500 relative right-3">
+                {comment.name}
+              </span>
+              :<span>{comment.comment}</span>
             </p>
           </div>
         ))}
